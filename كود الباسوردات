@@ -1,0 +1,24 @@
+import random
+
+name = ["Ali", "Mustafa"]
+year = ["1990"]
+football = ["Messi"]
+car = ["Nissan"]
+cat = ["siri"]
+son = ["Ahmed"]
+
+symbols = ["", "@", "#", "_", ".", "123", "!", "$"]
+
+data = name + year + football + car + cat + son
+
+passwords = set()
+
+while len(passwords) < 100000:
+    p = random.choice(data) + random.choice(data) + random.choice(symbols)
+    passwords.add(p)
+
+with open("passwords.txt", "w") as file:
+    for password in passwords:
+        file.write(password + "\n")
+
+print("تم إنشاء الباسوردات في ملف passwords.txt")
