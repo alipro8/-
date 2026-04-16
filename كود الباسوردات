@@ -1,24 +1,48 @@
 import random
+import os
 
 name = ["Ali", "Mustafa"]
 year = ["1990"]
 football = ["Messi"]
 car = ["Nissan"]
-cat = ["siri"]
+cat = ["Siri"]
 son = ["Ahmed"]
-
-symbols = ["", "@", "#", "_", ".", "123", "!", "$"]
-
-data = name + year + football + car + cat + son
+chars = ["@", "#", "_", "!", "$"]
 
 passwords = set()
+start_time = time.time()
 
+# Generation Loop
 while len(passwords) < 100000:
-    p = random.choice(data) + random.choice(data) + random.choice(symbols)
-    passwords.add(p)
+    n = random.choice(name)
+    y = random.choice(year)
+    f = random.choice(football)
+    c = random.choice(car)
+    s = random.choice(son)
+    ct = random.choice(cat)
+    sym = random.choice(chars)
+    num = str(random.randint(0, 9999))
 
-with open("passwords.txt", "w") as file:
-    for password in passwords:
-        file.write(password + "\n")
+    # 5 Patterns
+    p1 = n + y
+    p2 = f + sym + y
+    p3 = c + "_" + s
+    p4 = ct + num + "!"
+    p5 = n.lower() + sym + num
+    
+    selected = random.choice([p1, p2, p3, p4, p5])
+    
+    if random.randint(1, 2) == 1:
+        selected = selected.upper()
+    
+    passwords.add(selected)
 
-print("تم إنشاء الباسوردات في ملف passwords.txt")
+# Save to file
+with open("passwords.txt", "w") as f:
+    for p in passwords:
+        f.write(p + "\n")
+
+end_time = time.time()
+
+# Output
+print(" توليد 100000 passwords!")
